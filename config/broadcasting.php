@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => env('BROADCAST_DRIVER', 'pusher'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,8 +38,8 @@ return [
             'options' => [
                 'cluster' => 'ap2',
                 'encrypted' => false,
-                'host' => '127.0.0.1',
-                'port' => 6001,
+                // 'host' => '127.0.0.1',
+                // 'port' => 6001,
                 'scheme' => 'http'
             ],
         ],

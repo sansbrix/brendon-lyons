@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>
-      Paper Dashboard 2 by Creative Tim
+        {{ config('app.name', 'Laravel') }}
     </title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
     <!--     Fonts and icons     -->
@@ -25,7 +25,7 @@
         <!-- Navbar -->
         @include('layouts.header')
         <!-- End Navbar -->
-        <div class="content">
+        <div class="content" style="height: 100vh">
             @yield('content')
         </div>
         @include('layouts.footer')
@@ -45,13 +45,17 @@
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('dist/js/paper-dashboard.min.js?v=2.0.1')}}" type="text/javascript"></script><!-- Paper Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{asset('dist/demo/demo.js')}}"></script>
-    <script>
-      $(document).ready(function() {
-        // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-        demo.initChartsPages();
-      });
-    </script>
-
-
+    <script src="{{ asset('main.js')}}"></script>
+    <script src="{{ asset('swal/swal.min.js')}}"></script>
+    @foreach (['danger', 'warning', 'success', 'info', 'error'] as $msg)
+        @if(Session::has($msg))
+        <script>
+            swal({
+                text: '{{ Session::get($msg) }}',
+                icon : '{{$msg}}',
+            });
+        </script>
+        @endif
+    @endforeach
 
   </body></html>

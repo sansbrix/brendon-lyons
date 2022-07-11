@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ReasonCodeController;
+use App\Http\Controllers\ZipCodeController;
+use App\Models\ZipCode;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.main');
+Route::get('/', function() {
+    $zipCodes = ZipCode::all();
+    return view('welcome')->with(['zip_codes' => $zipCodes]);
 });
 
-Route::get('/page1', function () {
-    return view('pages.page1');
-})->name('page1');
+Route::group(['prefix' => 'admin'], function() {
+    Route::post('zip-codes',[ZipCodeController::class, 'store'])->name('zip-code.store');
+    Route::resource('zip-codes', ZipCodeController::class);
+    Route::resource('reason-codes', ReasonCodeController::class);
 
-Route::get('/page2', function () {
-    return view('pages.page2');
-})->name('page2');
+    Route::post('import-zip-codes',[ZipCodeController::class, 'importZipCode'])->name('zip-code.import');
+});
 
-Route::get('/page3', function () {
-    return view('pages.page3');
-})->name('page3');
+Auth::routes(['register' => false]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/get-zip-codes', [App\Http\Controllers\AjaxController::class, 'getZipCodes'])->name('get-zip-codes');
