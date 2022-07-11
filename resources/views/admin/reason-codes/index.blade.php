@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="col-md-6">
-                        <form style="width: 100%; display: flex;">
+                        {{-- <form style="width: 100%; display: flex;">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input required type="text" class="form-control" name="name" placeholder="Search Zip Code">
@@ -28,7 +28,7 @@
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary mt-0">Search</button>
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>
