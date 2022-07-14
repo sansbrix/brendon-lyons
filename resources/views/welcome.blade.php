@@ -22,7 +22,7 @@
                 <table id="table_id" class="display w-100">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>#</th>
                             <th>Zip Code</th>
                             <th>Reason Code</th>
                             <th>Status</th>
@@ -44,7 +44,7 @@
                serverSide: true,
                ajax: '{{ route('get-zip-codes') }}',
                columns: [
-                        { data: 'id', name: 'id' },
+                        { data: 'DT_RowIndex', orderable: false, searchable: false},
                         { data: 'zip_code', name: 'zip_code' },
                         { data: 'reason_code.reason_code', name: 'reason_code_id', defaultContent: '' },
                         { data: 'status', name: 'status' }
