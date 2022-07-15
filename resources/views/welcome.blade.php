@@ -46,7 +46,7 @@
                columns: [
                         { data: 'DT_RowIndex', orderable: false, searchable: false},
                         { data: 'zip_code', name: 'zip_code' },
-                        { data: 'reason_code.reason_code', name: 'reason_code_id', defaultContent: '' },
+                        { data: 'reason_code', name: 'reason_code.reason_code', defaultContent: '' },
                         { data: 'status', name: 'status' }
                      ]
             });

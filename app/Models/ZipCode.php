@@ -13,4 +13,12 @@ class ZipCode extends Model
     public function reason_code() {
         return $this->belongsTo(ReasonCode::class);
     }
+
+    public function reasonCode() {
+        if($this->reason_code()) {
+            return $this->reason_code()->reason_code;
+        } else {
+            return null;
+        }
+    }
 }
