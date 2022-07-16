@@ -17,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    $zipCodes = ZipCode::all();
-    return view('welcome')->with(['zip_codes' => $zipCodes]);
-});
+    return view('welcome');
+})->name('page1');
+
+Route::get('/page-2', function() {
+    return view('page2');
+})->name('page2');
 
 Route::group(['prefix' => 'admin'], function() {
     Route::post('zip-codes',[ZipCodeController::class, 'store'])->name('zip-code.store');
@@ -34,3 +37,4 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/get-zip-codes', [App\Http\Controllers\AjaxController::class, 'getZipCodes'])->name('get-zip-codes');
+Route::get('/get-zip-codes-all', [App\Http\Controllers\AjaxController::class, 'getZipCodesAll'])->name('get-zip-codes-all');
