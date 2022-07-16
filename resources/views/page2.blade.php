@@ -46,7 +46,7 @@
             $('#table_id').DataTable({
                processing: true,
                serverSide: true,
-               searching: false,
+            //    searching: false,
                ajax: '{{ route('get-zip-codes-all') }}',
                columns: [
                         // { data: 'DT_RowIndex', orderable: false, searchable: false},
