@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReasonCodeController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ZipCodeController;
 use App\Models\ZipCode;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('zip-codes',[ZipCodeController::class, 'store'])->name('zip-code.store');
     Route::resource('zip-codes', ZipCodeController::class);
     Route::resource('reason-codes', ReasonCodeController::class);
-
+    Route::resource('status', StatusController::class);
     Route::post('import-zip-codes',[ZipCodeController::class, 'importZipCode'])->name('zip-code.import');
 });
 

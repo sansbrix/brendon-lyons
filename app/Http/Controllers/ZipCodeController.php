@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constant\StatusConstant;
 use App\Events\ZipUpdatedEvent;
 use App\Models\ReasonCode;
+use App\Models\Status;
 use App\Models\ZipCode;
 use App\Services\Excel\ImportZipCode;
 use Illuminate\Http\Request;
@@ -39,7 +40,7 @@ class ZipCodeController extends Controller
         return view('admin.zip-codes.add-edit')->with([
             'zipCode' => null,
             'reason_codes' => $reasonCodes,
-            'statuses' => StatusConstant::getConstants(),
+            'statuses' => Status::all(),
         ]);
     }
 
@@ -82,7 +83,7 @@ class ZipCodeController extends Controller
         return view('admin.zip-codes.add-edit')->with([
             'zipCode' => $zipCode,
             'reason_codes' => $reasonCodes,
-            'statuses' => StatusConstant::getConstants(),
+            'statuses' => Status::all(),
         ]);
     }
 
@@ -96,7 +97,11 @@ class ZipCodeController extends Controller
     public function update(Request $request, ZipCode $zipCode)
     {
         $data = $request->all();
-        $created = $zipCode->update($data);
+        $created = $zipCode->update([
+            'zip_code' => $data['zip_code'],
+            'reason_code_id' => $data['reason_code_id'],
+            'status_id' => $data['status_id'],
+        ]);
         if($created) {
             ZipUpdatedEvent::dispatch();
             return redirect()->back()->with('success', 'Zip Code Updated Successfully');

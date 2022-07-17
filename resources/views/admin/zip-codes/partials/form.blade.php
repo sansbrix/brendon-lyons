@@ -37,17 +37,18 @@
     <div class="form-group row">
         <label for="reason_code_id" class="col-sm-2 col-form-label">Status</label>
         <div class="col-sm-10">
-            <select class="form-control" name="status">
+            <select class="form-control" name="status_id">
                 <option value="">Select Status</option>
                 @foreach($statuses as $status)
-                    <option @if($zipCode && $status == $zipCode->status) selected @endif value="{{$status}}">{{$status}}</option>
+                    <option @if($zipCode && $status->id == $zipCode->status_id) selected @endif value="{{$status->id}}">{{$status->status}}</option>
                 @endforeach
             </select>
-            @if ($errors->has('status'))
+            @if ($errors->has('status_id'))
             <span class="invalid-feedback" style="display: block;" role="alert">
-                <strong>{{ $errors->first('status') }}</strong>
+                <strong>{{ $errors->first('status_id') }}</strong>
             </span>
             @endif
+            <a href="{{ route('status.create') }}">Status, Not Available ! Click Here </a>
         </div>
     </div>
 

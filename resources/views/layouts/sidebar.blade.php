@@ -27,6 +27,12 @@
             <p>Reason Codes</p>
             </a>
         </li>
+        <li class="active ">
+            <a href="{{route('status.index')}}">
+            <i class="nc-icon nc-bank"></i>
+            <p>Status</p>
+            </a>
+        </li>
       </ul>
     </div>
   </div>

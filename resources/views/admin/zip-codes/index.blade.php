@@ -21,7 +21,7 @@
                     <form style="width: 100%; display: flex;">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input required type="text" class="form-control" name="name" value={{request()->get('name') ? request()->get('name') : ''}} placeholder="Search Zip Code">
+                                <input required type="text" class="form-control" name="name" value="{{request()->get('name') ? request()->get('name') : ''}}" placeholder="Search Zip Code">
                             </div>
                         </div>
                         <div class="col-md-3">

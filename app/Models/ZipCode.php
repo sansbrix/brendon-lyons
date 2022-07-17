@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ZipCode extends Model
 {
     use HasFactory;
-    protected $fillable = ['zip_code', 'reason_code_id', 'status'];
+    protected $fillable = ['zip_code', 'reason_code_id', 'status_id'];
 
     public function reason_code() {
         return $this->belongsTo(ReasonCode::class);
@@ -20,5 +20,9 @@ class ZipCode extends Model
         } else {
             return null;
         }
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class, 'status_id');
     }
 }

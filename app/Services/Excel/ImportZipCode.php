@@ -1,6 +1,7 @@
 <?php namespace App\Services\Excel;
 
 use App\Models\ReasonCode;
+use App\Models\Status;
 use App\Models\ZipCode;
 use Exception;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -63,10 +64,15 @@ class ImportZipCode implements ToModel, SkipsOnFailure, WithHeadingRow, WithVali
             $reasonCode = ReasonCode::create(['reason_code' => $array['reason']]);
         }
 
+        $status = Status::where(['status' => $array['status']])->first();
+        if(!$status && $array['status']) {
+            $status = Status::create(['status' => $array['status']]);
+        }
+
         $zipCode = ZipCode::where([
             'zip_code' => $array['zip'],
             'reason_code_id' => $reasonCode ? $reasonCode->id : null,
-            'status' => $array['status']
+            'status_id' => $status->id
         ])->first();
 
         if(!$zipCode) {

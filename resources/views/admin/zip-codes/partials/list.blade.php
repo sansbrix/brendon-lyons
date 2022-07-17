@@ -11,7 +11,7 @@
             {{ $zip_code->reason_code ? $zip_code->reason_code->reason_code : ''}}
         </td>
         <td class="budget">
-            {{ $zip_code->status}}
+            {{ $zip_code->status ? $zip_code->status->status : '' }}
         </td>
         <td class="actions">
             <a href="{{ route('zip-codes.edit', ['zip_code' => $zip_code]) }}">
