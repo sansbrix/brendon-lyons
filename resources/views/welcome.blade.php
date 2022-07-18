@@ -49,7 +49,9 @@
                ajax: '{{ route('get-zip-codes') }}',
                columns: [
                         // { data: 'DT_RowIndex', orderable: false, searchable: false},
-                        { data: 'zip_code', name: 'zip_code',  render: function (data, type) { return data.padStart(5, "0") } },
+                        { data: 'zip_code', name: 'zip_code'
+                        // ,  render: function (data, type) { return data.padStart(5, "0") }
+                        },
                         { data: 'reason_code', name: 'reason_code.reason_code', defaultContent: '' },
                         { data: 'status', name: 'status.status', defaultContent: '' }
                      ]
