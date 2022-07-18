@@ -8,10 +8,10 @@
             {{ $status->status}}
         </td>
         <td class="actions">
-            @if($status->status != "NOT OK")
             <a href="{{ route('status.edit', ['status' => $status]) }}">
                 <i style="font-size: 25px;" class="mr-5 fa fa-pencil" title="Edit Status"></i>
             </a>
+            @if($status->id != 1)
             <i style="font-size: 25px;" class="fa fa-trash cursor-pointer ask-before-delete" type="submit" title="Delete Status"></i>
             <form action="{{ route('status.destroy', ['status' => $status]) }}" method="POST">
                 @csrf

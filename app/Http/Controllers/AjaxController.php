@@ -11,8 +11,8 @@ use Yajra\DataTables\Facades\DataTables;
 class AjaxController extends Controller
 {
     public function getZipCodes(Request $request) {
-        $notOk = Status::where('status','LIKE', '%NOT OK%')->first();
-        $data = ZipCode::with(['reason_code', 'status'])->where('status_id', $notOk->id)->orderBy('updated_at', 'DESC');
+        // $notOk = Status::where('status','LIKE', '%NOT OK%')->first();
+        $data = ZipCode::with(['reason_code', 'status'])->where('status_id', 1)->orderBy('updated_at', 'DESC');
         return Datatables::eloquent($data)
             ->addColumn('reason_code', function ($order) {
                 return $order->reason_code ? $order->reason_code->reason_code : null;
