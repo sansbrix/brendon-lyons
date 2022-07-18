@@ -2,6 +2,7 @@
 
 use App\Constant\StatusConstant;
 use App\Models\ReasonCode;
+use App\Models\Status;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,12 +25,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/get-zip-codes', function(Request $request) {
 
     if($request->has('status')) {
-        if(in_array($request->get('status'), StatusConstant::getConstants())) {
-            $zipCodes = ZipCode::where('status', $request->get('status'))->paginate(20);
+        $statuses = Status::all(['status'])->unique('status')->values()->map(function($q){
+            return $q->status;
+        })->values()->toArray();
+        if(in_array($request->get('status'), $statuses)) {
+            $zipCodes = ZipCode::whereHas('status', function($q) use($request) {
+                return $q->where('status', $request->get('status'));
+            })->paginate(20);
         } else {
             return response()->json([
                 'error' => 'Wrong status code.',
-                'message' => 'Status code should be either'. implode(", ", StatusConstant::getConstants())
+                'message' => 'Status code should be either'. implode(", ", $statuses)
             ], 500);
         }
     } else if($request->has('reason_code')) {

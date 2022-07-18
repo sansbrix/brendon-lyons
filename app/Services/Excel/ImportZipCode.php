@@ -71,15 +71,18 @@ class ImportZipCode implements ToModel, SkipsOnFailure, WithHeadingRow, WithVali
 
         $zipCode = ZipCode::where([
             'zip_code' => $array['zip'],
-            'reason_code_id' => $reasonCode ? $reasonCode->id : null,
-            'status_id' => $status->id
         ])->first();
 
         if(!$zipCode) {
             ZipCode::create([
                 'zip_code' => $array['zip'],
                 'reason_code_id' => $reasonCode ? $reasonCode->id : null,
-                'status' => $array['status']
+                'status' => $status ? $status->id : null,
+            ]);
+        } else {
+            $zipCode->update([
+                'reason_code_id' => $reasonCode ? $reasonCode->id : null,
+                'status_id' => $status ? $status->id : null,
             ]);
         }
 
