@@ -57,6 +57,10 @@ Route::get('/get-zip-codes', function(Request $request) {
     } else {
         $zipCodes = ZipCode::paginate(20);
     }
-
-    return response()->json($zipCodes);
+    $Output = ($zipCodes->map(function($q) {
+        $q->status_code_value = $q->status ? $q->status->status : null;
+        $q->reason_code_value = $q->reason_code ? $q->reason_code->reason_code : null;
+        return $q;
+    }));
+    return response()->json($Output);
 });

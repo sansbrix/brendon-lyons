@@ -85,7 +85,6 @@ class ImportZipCode implements ToModel, SkipsOnFailure, WithHeadingRow, WithVali
                 'status_id' => $status ? $status->id : null,
             ]);
         }
-
     }
 
 }

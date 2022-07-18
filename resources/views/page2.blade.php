@@ -53,8 +53,8 @@
                         { data: 'zip_code', name: 'zip_code'
                         // ,  render: function (data, type) { return data.padStart(5, "0") }
                         },
-                        { data: 'reason_code', name: 'reason_code.reason_code', defaultContent: '' },
-                        { data: 'status', name: 'status.status', defaultContent: '' }
+                        { data: 'reason_code', name: 'reason_code.reason_code', defaultContent: '', sortable: false },
+                        { data: 'status', name: 'status.status', defaultContent: '', sortable: false }
                      ]
             });
          });
